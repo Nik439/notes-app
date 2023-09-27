@@ -1,12 +1,18 @@
 'use client'
 import styled from "styled-components";
+import { note } from "../models/note";
+import Link from "next/link";
 
-export default function Note() {
+export default function Note({note}: {note: note}) {
+
   return (
-    <Container>
-      <Title>test</Title>
-      <Text>test</Text>
-    </Container>
+    <Link href={`/note/${note.id}`}>
+      <Container>
+        <Title>{note.title}</Title>
+        <Text>{note.text}</Text>
+      </Container>
+    </Link>
+
   )
 }
 
@@ -25,6 +31,7 @@ export const Container = styled.div`
   border-right: 6px solid #000;
   border-radius: 8px;
   max-width: calc(100% - 16px);
+  overflow: hidden;
 `;
 
 export const Title = styled.h2`

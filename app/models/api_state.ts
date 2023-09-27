@@ -1,0 +1,1 @@
+export type api_state = 'loading' | 'success' | 'error';
