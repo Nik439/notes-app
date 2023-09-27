@@ -34,17 +34,17 @@ db.serialize(()=>{
               const rows = [
                 [
                   "test title 1",
-                  "test text 1",
+                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel ex sed nisl feugiat suscipit. Mauris nunc tortor, scelerisque sed consectetur non, imperdiet quis est. Aliquam consequat erat ante, vel faucibus risus laoreet quis. Suspendisse varius justo vehicula, pulvinar quam quis, scelerisque ligula. Suspendisse metus dolor, sodales at vehicula sed, porttitor eu libero. Sed augue metus, scelerisque eu luctus vel, vestibulum non eros. Aenean sodales dolor vel turpis fermentum consectetur. Mauris iaculis velit quis tortor laoreet, quis convallis justo venenatis.",
                   new Date().toISOString(),
                 ],
                 [
                   "test title 2",
-                  "test text 2",
+                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel ex sed nisl feugiat suscipit. Mauris nunc tortor, scelerisque sed consectetur non, imperdiet quis est. Aliquam consequat erat ante, vel faucibus risus laoreet quis. Suspendisse varius justo vehicula, pulvinar quam quis, scelerisque ligula. Suspendisse metus dolor, sodales at vehicula sed, porttitor eu libero. Sed augue metus, scelerisque eu luctus vel, vestibulum non eros. Aenean sodales dolor vel turpis fermentum consectetur. Mauris iaculis velit quis tortor laoreet, quis convallis justo venenatis.",
                   new Date().toISOString(),
                 ],
                 [
                   "test title 3",
-                  "test text 3",
+                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel ex sed nisl feugiat suscipit. Mauris nunc tortor, scelerisque sed consectetur non, imperdiet quis est. Aliquam consequat erat ante, vel faucibus risus laoreet quis. Suspendisse varius justo vehicula, pulvinar quam quis, scelerisque ligula. Suspendisse metus dolor, sodales at vehicula sed, porttitor eu libero. Sed augue metus, scelerisque eu luctus vel, vestibulum non eros. Aenean sodales dolor vel turpis fermentum consectetur. Mauris iaculis velit quis tortor laoreet, quis convallis justo venenatis.",
                   new Date().toISOString(),
                 ]
             ]
