@@ -23,6 +23,18 @@ export default function NotePage({ params: {id} }: { params: { id: number } }) {
       throw new Error
   }
 
+  async function updateNote(updated_title: string, updated_text: string) {
+    const res = await fetch(`/api/note/${id}`, {
+      method: 'PUT',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify([updated_title, updated_text, new Date().toISOString()])
+    })
+    if (res.ok)
+      return await res.json()
+    else
+      throw new Error
+  }
+
   function handleTitleChange(e:React.ChangeEvent<HTMLTextAreaElement>) {
     setTitle(e.target.value)
   }
@@ -61,6 +73,12 @@ export default function NotePage({ params: {id} }: { params: { id: number } }) {
   }
 
 
+  useEffect(()=>{
+    if (noteState == "success") {
+      updateNote(title, text)
+    }    
+  },[title, text, noteState])
+
   useEffect(() => {
     if (textRef.current) {
       // reset height to get the correct scrollHeight
@@ -87,7 +105,8 @@ export default function NotePage({ params: {id} }: { params: { id: number } }) {
     getNote().then((res: note)=>{
       setNoteState("success")
       setTitle(res.title)
-      setText(res.text)      
+      setText(res.text)
+      
     }).catch(()=>{
       setNoteState("error")
       router.push("/")
@@ -110,8 +129,8 @@ export default function NotePage({ params: {id} }: { params: { id: number } }) {
           <></>
         :
           <>
-            <Title onChange={handleTitleChange} onKeyDown={handleTitleKeyDown} value={title} ref={titleRef} rows={1}></Title>
-            <Text onChange={handleTextChange} onKeyDown={handleTextKeyDown} value={text} ref={textRef} rows={1}></Text>
+            <Title onChange={handleTitleChange} onKeyDown={handleTitleKeyDown} value={title} ref={titleRef} rows={1} placeholder="New note"></Title>
+            <Text onChange={handleTextChange} onKeyDown={handleTextKeyDown} value={text} ref={textRef} rows={1} placeholder="text..."></Text>
             <FocusHelper onClick={focusText}></FocusHelper>
           </>
         }
