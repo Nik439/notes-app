@@ -10,10 +10,15 @@ export async function GET(req, context) {
   const {params} = context
   const note = await db.get("SELECT id, title, text FROM notes WHERE id = ?", params.id);
 
-  return new Response(JSON.stringify(note), {
-    headers: { "Content-Type": "application/json" },
-    status: 200,
-  });
+  if (note)
+    return new Response(JSON.stringify(note), {
+      headers: { "Content-Type": "application/json" },
+      status: 200,
+    });
+  else
+    return new Response(undefined, {
+      status: 404,
+    });
 }
 
 export async function DELETE(req, context) {

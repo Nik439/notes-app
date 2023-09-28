@@ -1,6 +1,6 @@
 export type note = {
-  id: number
+  id?: number
   title: string
   text: string
-  last_update: string
+  last_update?: string
 }
