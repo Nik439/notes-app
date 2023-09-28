@@ -42,7 +42,6 @@ export const Container = styled(Link)`
   border-bottom: 6px solid #000;
   border-right: 6px solid #000;
   border-radius: 8px;
-  overflow: hidden;
 `;
 
 export const Content = styled.div`
@@ -58,7 +57,7 @@ export const Content = styled.div`
   transform-origin: center;
   animation: ${clipAnimation} 0.8s ease-out 10ms;
   transition: 0.8s;
-  filter: blur(0px);
+  position: relative;
 
   &:hover {
     .note_background {

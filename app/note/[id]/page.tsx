@@ -134,6 +134,7 @@ export const Container = styled.div`
 export const Title = styled.textarea`
   font-size: 30px;
   font-weight: bolder;
+  letter-spacing: 0px;
   border: 0;
   outline: none;
   width: 100%;
@@ -143,8 +144,10 @@ export const Title = styled.textarea`
 `;
 
 export const Text = styled.textarea`
+  margin-top: 10px;
   font-size: 18px;
   font-weight: normal;
+  letter-spacing: 0px;
   border: 0;
   outline: none;
   width: 100%;
