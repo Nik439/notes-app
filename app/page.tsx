@@ -1,7 +1,6 @@
 'use client'
 import styled, { ThemeProvider } from "styled-components";
 import { theme } from "./global_theme";
-import Navbar from "./components/navbar";
 import Note from "./components/note";
 import { useEffect, useState } from "react";
 import { api_state } from "./models/api_state";
@@ -22,13 +21,12 @@ export default function Home() {
       setNotes(res)
     }).catch(err=>{
       setNotesState("error")
-      console.log(err);
+      console.error(err);
     })
   },[])
 
   return (
     <ThemeProvider theme={theme}>
-      <Navbar></Navbar>
       <Container>
         {notesState=="loading" ? 
           <></>
@@ -45,10 +43,9 @@ export default function Home() {
 
 export const Container = styled.div`
   display: flex;
-  flex: 1;
   flex-wrap: wrap;
   align-items: start;
   justify-content: start;
   background-color: #fff;
-  padding: 20px 0;
+  gap: 15px;
 `;

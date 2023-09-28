@@ -1,41 +1,50 @@
 'use client'
+import '../styles/navbar.css'
 import Image from "next/image";
-import styled from "styled-components";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Navbar() {
-  return (
-    <Container>
-      <Content>
-        <Logo src="/icon.svg" alt="" width={50} height={50}></Logo>
+  const [showCommands, setShowCommands] = useState<boolean>(false) 
+  const path = usePathname()
+  const router = useRouter()  
 
-      </Content>
-    </Container>
+  useEffect(()=>{
+    //set showCommands to true if in note page
+    if (path.includes("/note/"))
+      setShowCommands(true)
+    else
+      setShowCommands(false)
+  }, [path])
+
+  async function deleteNote() {
+    //extract note id from path
+    const res = await fetch(`/api/note/${path.substring(path.length-1)}`, {
+      method: 'DELETE'
+    })
+    return await res.json()
+  }
+
+  function handleDelete() {
+    deleteNote().then(()=>{
+      router.push("/")
+    }).catch((err)=>{
+      console.error(err)
+    })
+  }
+
+  return (
+    <div className="container">
+      <div className={`content_left ${showCommands ? "show" : ""}`}>
+        <Link className="back_button" href="/">
+          <Image className="" src="/arrow.svg" alt="" width={40} height={40}></Image>
+        </Link>
+        <Image className="logo" src="/icon.svg" alt="" width={60} height={60}></Image>
+      </div>
+      <div className={`content_right ${showCommands ? "show" : ""}`}>
+        <Image onClick={handleDelete} className="" src="/bin.svg" alt="" width={40} height={40}></Image>
+      </div>
+    </div>
   )
 }
-
-
-export const Container = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 75px;
-  width: 100%;
-  background-color: #fff;
-  padding: 8px 8px 0px;
-`;
-
-export const Content = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 5px 10px;
-  height: 100%;
-  width: 100%;
-  border: 2px solid #000;
-  border-bottom: 6px solid #000;
-  border-right: 6px solid #000;
-  border-radius: 8px;
-`;
-
-export const Logo = styled(Image)`
-  
-`;
