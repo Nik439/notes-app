@@ -2,8 +2,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 75px;
+  height: 85px;
   margin: 10px 0 20px;
+  background-color: #fff;
   border: 2px solid #000;
   border-bottom: 6px solid #000;
   border-right: 6px solid #000;
@@ -30,17 +31,20 @@
   align-items: center;
   padding: 5px 10px;
   height: 100%;
-  transform: translateX(50px);
-  transition: .5s;
+  transform: translateX(100%);
   column-gap: 10px;
 
   img {
     cursor: pointer;
+    position: absolute;
+    transform: translateX(0px);
+    transition: .5s;
+
+    &.show {
+      transform: translateX(-70px);
+    }
   }
 
-  &.show {
-    transform: translateX(0px);
-  }
 }
 
 .logo_container {

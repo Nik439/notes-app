@@ -8,9 +8,9 @@ const db = await open({
 
 export async function POST(req) {
   const res = await req.json()
-  await db.run(`INSERT INTO notes(title, text, last_update) VALUES(?, ?, ?)`, res )
+  let result = await db.run(`INSERT INTO notes(title, text, last_update) VALUES(?, ?, ?)`, res )
 
-  return new Response(JSON.stringify(res), {
+  return new Response(JSON.stringify({id: result.lastID}), {
     headers: { "Content-Type": "application/json" },
     status: 200,
   });
