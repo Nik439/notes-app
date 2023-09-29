@@ -63,7 +63,7 @@ export default function Navbar() {
         <Link className="back_button" href="/">
           <Image className="" src="/arrow.svg" alt="" width={40} height={40}></Image>
         </Link>
-        <Image className="logo" src="/icon.svg" alt="" width={65} height={65}></Image>
+        <Image className="logo" src="/icon.svg" priority alt="" width={65} height={65}></Image>
       </div>
       <div className={`content_right`}>
         <Image className={`bin ${commandType=="edit" ? "show" : ""}`} onClick={handleDelete} src="/bin.svg" alt="" width={50} height={50}></Image>

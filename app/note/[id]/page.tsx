@@ -141,7 +141,7 @@ export default function NotePage({ params: {id} }: { params: { id: number } }) {
 }
 
 
-export const Container = styled.div`
+const Container = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -154,7 +154,7 @@ export const Container = styled.div`
   margin: 0 auto;
 `;
 
-export const Title = styled.textarea`
+const Title = styled.textarea`
   font-size: 30px;
   font-weight: bolder;
   letter-spacing: 0px;
@@ -166,7 +166,7 @@ export const Title = styled.textarea`
   border-bottom: 1px solid black;
 `;
 
-export const Text = styled.textarea`
+const Text = styled.textarea`
   margin-top: 10px;
   font-size: 18px;
   font-weight: normal;
@@ -178,7 +178,7 @@ export const Text = styled.textarea`
   overflow: hidden;
 `;
 
-export const FocusHelper = styled.div`
+const FocusHelper = styled.div`
   width: 100%;
   flex: 2;
 `
