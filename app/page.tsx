@@ -31,7 +31,11 @@ export default function Home() {
         {notesState=="loading" ? 
           <></>
         :
-          notes.map((note: note)=>(
+          notes.sort((a, b) => {
+            //sort array from most to least recent
+            return a.last_update && b.last_update ? new Date(b.last_update).getTime()-new Date(a.last_update).getTime() : 0
+          })
+          .map((note: note)=>(
             <Note  key={note.id} note={note}></Note>
           ))
         }

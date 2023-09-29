@@ -5,13 +5,59 @@ import Link from "next/link";
 
 export default function Note({note}: {note: note}) {
 
+  function calculateTimePassed(): string {
+    let differenceValue
+    if (note.last_update) {
+      //time in seconds
+      differenceValue =(new Date().getTime() - new Date(note.last_update).getTime()) / 1000;
+      if (differenceValue < 60)
+        return `less than 1 minute`
+
+      //time in minutes
+      differenceValue /= 60;
+      if (differenceValue < 60) {
+        let tmp = Math.floor(differenceValue)
+        return `${tmp} ${tmp > 1 ? "minutes" : "minute"}`
+      }
+      
+      //time in hours
+      differenceValue /= 60;
+      if (differenceValue < 24) {
+        let tmp = Math.floor(differenceValue)
+        return `${tmp} ${tmp > 1 ? "hours" : "hour"}`
+      }
+      
+      //time in days
+      differenceValue /= 24;
+      if (differenceValue < 30) {
+        let tmp = Math.floor(differenceValue)
+        return `${tmp} ${tmp > 1 ? "days" : "day"}`
+      }
+      
+      //time in months
+      differenceValue /= 30;
+      if (differenceValue < 12) {
+        let tmp = Math.floor(differenceValue)
+        return `${tmp} ${tmp > 1 ? "months" : "month"}`
+      }
+      
+      //time in years
+      differenceValue /= 12;
+      let tmp = Math.floor(differenceValue)
+      return `${tmp} ${tmp > 1 ? "years" : "year"}`
+    }
+
+    return ""
+  }
+
   return (
     <Container href={`/note/${note.id}`}>
       <Content>
         <NoteBackground className="note_background"></NoteBackground>
-        <Title>{note.title}</Title>
+        <Title>{note.title || "New note"}</Title>
         <Text>{note.text}</Text>
       </Content>
+      <LastUpdate>Edited {calculateTimePassed()} ago</LastUpdate>
     </Container>
   )
 }
@@ -43,6 +89,12 @@ export const Container = styled(Link)`
   border-right: 6px solid #000;
   border-radius: 8px;
 `;
+
+export const LastUpdate = styled.div`
+  position: absolute;
+  margin-bottom: -275px;
+  font-size: 12px;
+`
 
 export const Content = styled.div`
   height: 100%;
@@ -78,8 +130,16 @@ position: absolute;
 
 export const Title = styled.h2`
   z-index: 1;
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid black;
+  line-height: 1.2;
+  margin: 7px;
 `;
 
 export const Text = styled.p`
   z-index: 1;
+  line-height: 1.2;
+  width: 100%;
+  white-space: pre-wrap;
 `;
