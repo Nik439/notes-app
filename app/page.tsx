@@ -6,11 +6,7 @@ import { useEffect, useState } from "react";
 import { api_state } from "./models/api_state";
 import { note } from "./models/note";
 import Image from "next/image";
-
-async function getNotes() {
-  const res = await fetch("/api/notes")
-  return await res.json()
-}
+import { deleteNote, getNotes } from "./utils/api";
 
 export default function Home() {
   const [notes, setNotes] = useState<note[]>([])
@@ -52,14 +48,6 @@ export default function Home() {
     
     return () => document.removeEventListener("click", closeContextMenu);
   },[])
-
-  async function deleteNote(id: number) {
-    //extract note id from path
-    const res = await fetch(`/api/note/${id}`, {
-      method: 'DELETE'
-    })
-    return await res.json()
-  }
 
   function handleDelete() {
     deleteNote(selectedNote).then(()=>{

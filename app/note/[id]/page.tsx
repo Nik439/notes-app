@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { api_state } from "../../models/api_state";
 import { note } from "../../models/note";
 import { useRouter } from "next/navigation";
+import { getNote, updateNote } from "@/app/utils/api";
 
 export default function NotePage({ params: {id} }: { params: { id: number } }) {
   const [title, setTitle] = useState<string>("")
@@ -14,26 +15,6 @@ export default function NotePage({ params: {id} }: { params: { id: number } }) {
   const router = useRouter()
   const titleRef = useRef<HTMLTextAreaElement>(null);
   const textRef = useRef<HTMLTextAreaElement>(null);
-
-  async function getNote() {
-    const res = await fetch(`/api/note/${id}`)
-    if (res.ok)
-      return await res.json()
-    else
-      throw new Error
-  }
-
-  async function updateNote(updated_title: string, updated_text: string) {
-    const res = await fetch(`/api/note/${id}`, {
-      method: 'PUT',
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify([updated_title, updated_text, new Date().toISOString()])
-    })
-    if (res.ok)
-      return await res.json()
-    else
-      throw new Error
-  }
 
   function handleTitleChange(e:React.ChangeEvent<HTMLTextAreaElement>) {
     setTitle(e.target.value)
@@ -75,7 +56,7 @@ export default function NotePage({ params: {id} }: { params: { id: number } }) {
 
   useEffect(()=>{
     if (noteState == "success") {
-      updateNote(title, text)
+      updateNote(id, title, text)
     }    
   },[title, text, noteState])
 
@@ -103,7 +84,7 @@ export default function NotePage({ params: {id} }: { params: { id: number } }) {
 
 
   useEffect(()=>{
-    getNote().then((res: note)=>{
+    getNote(id).then((res: note)=>{
       setNoteState("success")
       setTitle(res.title)
       setText(res.text)

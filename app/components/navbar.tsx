@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { navbar_commands } from '../models/navbar_commands';
+import { createNote, deleteNote } from '../utils/api';
 
 export default function Navbar() {
   const [commandType, setCommandType] = useState<navbar_commands>("") 
@@ -21,29 +22,12 @@ export default function Navbar() {
       setCommandType("")
   }, [path])
 
-  async function deleteNote() {
-    //extract note id from path
-    const res = await fetch(`/api/note/${path.substring(path.length-1)}`, {
-      method: 'DELETE'
-    })
-    return await res.json()
-  }
-
   function handleDelete() {
-    deleteNote().then(()=>{
+    deleteNote(path.substring(path.length-1)).then(()=>{
       router.push("/")
     }).catch((err)=>{
       console.error(err)
     })
-  }
-
-  async function createNote() {
-    const res = await fetch(`/api/note`, {
-      method: 'POST',
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(["", "", new Date().toISOString()])
-    })
-    return await res.json()
   }
 
   function handleNew() {
