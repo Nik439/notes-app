@@ -88,11 +88,12 @@ export const Container = styled(Link)`
   border-bottom: 6px solid #000;
   border-right: 6px solid #000;
   border-radius: 8px;
+  margin: auto;
 `;
 
 export const LastUpdate = styled.div`
   position: absolute;
-  margin-bottom: -275px;
+  margin-bottom: -270px;
   font-size: 12px;
 `
 

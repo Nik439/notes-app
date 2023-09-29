@@ -80,6 +80,17 @@ export default function NotePage({ params: {id} }: { params: { id: number } }) {
   },[title, text, noteState])
 
   useEffect(() => {
+    if (titleRef.current) {
+      // reset height to get the correct scrollHeight
+      titleRef.current.style.height = "36px";
+      const scrollHeight = titleRef.current.scrollHeight;
+
+      //set the height directly, outside of the render loop
+      titleRef.current.style.height = scrollHeight + "px";
+    }
+  }, [titleRef.current, title, windowWidth]);
+
+  useEffect(() => {
     if (textRef.current) {
       // reset height to get the correct scrollHeight
       textRef.current.style.height = "0px";
@@ -90,16 +101,6 @@ export default function NotePage({ params: {id} }: { params: { id: number } }) {
     }
   }, [textRef.current, text, windowWidth]);
 
-  useEffect(() => {
-    if (titleRef.current) {
-      // reset height to get the correct scrollHeight
-      titleRef.current.style.height = "0px";
-      const scrollHeight = titleRef.current.scrollHeight;
-
-      //set the height directly, outside of the render loop
-      titleRef.current.style.height = scrollHeight + "px";
-    }
-  }, [titleRef.current, title, windowWidth]);
 
   useEffect(()=>{
     getNote().then((res: note)=>{
@@ -148,6 +149,9 @@ export const Container = styled.div`
   justify-content: start;
   background-color: #fff;
   padding: 10px 0px;
+  width: 100%;
+  max-width: 1490px;
+  margin: 0 auto;
 `;
 
 export const Title = styled.textarea`

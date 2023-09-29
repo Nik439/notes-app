@@ -46,10 +46,36 @@ export default function Home() {
 
 
 export const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: start;
-  justify-content: start;
+  display: grid;
+  grid-template-columns: 200px 1fr 1fr 1fr 1fr 1fr 200px;
   background-color: #fff;
-  gap: 15px;
+  column-gap: 15px;
+  row-gap: 30px;
+  margin: 0 auto 25px;
+  max-width: 1490px;
+  width: 100%;
+
+  ${({theme}) => theme.breakpoint.xxl} {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+
+  ${({theme}) => theme.breakpoint.xl} {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+
+  ${({theme}) => theme.breakpoint.lg} {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  ${({theme}) => theme.breakpoint.md} {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  ${({theme}) => theme.breakpoint.sm} {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  ${({theme}) => theme.breakpoint.xs} {
+    grid-template-columns: 1fr;
+  }
 `;

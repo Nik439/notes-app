@@ -55,6 +55,9 @@ export default function Navbar() {
   }
 
   return (
+    <>
+    <div className='top_background'></div>
+
     <div className="container">
       <div className={`content_left ${commandType=="edit" ? "show" : ""}`}>
         <Link className="back_button" href="/">
@@ -67,5 +70,6 @@ export default function Navbar() {
         <Image className={`new ${commandType=="home" ? "show" : ""}`} onClick={handleNew} src="/new.svg" alt="" width={50} height={50}></Image>
       </div>
     </div>
+    </>
   )
 }

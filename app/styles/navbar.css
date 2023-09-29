@@ -1,15 +1,29 @@
+.top_background {
+  position: fixed;
+  top: 0;
+  width: calc(100% - 40px);
+  height: 16px;
+  background-color: #fff;
+  z-index: 9;
+}
+
 .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
+  max-width: 1490px;
   height: 85px;
-  margin: 10px 0 20px;
+  margin: 10px auto 20px;
   background-color: #fff;
   border: 2px solid #000;
   border-bottom: 6px solid #000;
   border-right: 6px solid #000;
   border-radius: 8px;
   overflow: hidden;
+  position: sticky;
+  top: 10px;
+  z-index: 10;
 }
 
 .content_left {
@@ -33,18 +47,15 @@
   height: 100%;
   transform: translateX(100%);
   column-gap: 10px;
-
-  img {
-    cursor: pointer;
-    position: absolute;
-    transform: translateX(0px);
-    transition: .5s;
-
-    &.show {
-      transform: translateX(-70px);
-    }
-  }
-
+}
+.content_right img {
+  cursor: pointer;
+  position: absolute;
+  transform: translateX(0px);
+  transition: .5s;
+}
+.content_right img.show {
+  transform: translateX(-70px);
 }
 
 .logo_container {
