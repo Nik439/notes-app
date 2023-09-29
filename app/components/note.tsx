@@ -104,7 +104,6 @@ const Content = styled.div`
   height: 100%;
   width: 100%;
   background-color: #fff;
-  display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: start;
@@ -128,22 +127,35 @@ const NoteBackground = styled.div`
   width: 200px;
   height: 250px;
   margin-top: -5px;
+  margin-left: -10px;
   transform: translateY(250px);
   transition: 0.4s;
 `
 
 const Title = styled.h2`
   z-index: 1;
+  font-size: 24px;
   width: 100%;
   text-align: center;
   border-bottom: 1px solid black;
   line-height: 1.2;
-  margin: 7px;
+  margin: 7px 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2; 
+  -webkit-box-orient: vertical;
 `;
 
 const Text = styled.p`
   z-index: 1;
+  font-size: 16px;
   line-height: 1.2;
   width: 100%;
   white-space: pre-wrap;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  line-clamp: 8; 
+  -webkit-box-orient: vertical;
 `;
