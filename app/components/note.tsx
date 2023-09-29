@@ -3,7 +3,10 @@ import styled, { keyframes } from "styled-components";
 import { note } from "../models/note";
 import Link from "next/link";
 
-export default function Note({note}: {note: note}) {
+export default function Note(
+  {note, handleContextMenu}:
+  {note: note, handleContextMenu: (a: React.MouseEvent, b: number) => void}
+) {
 
   function calculateTimePassed(): string {
     let differenceValue
@@ -51,7 +54,7 @@ export default function Note({note}: {note: note}) {
   }
 
   return (
-    <Container href={`/note/${note.id}`}>
+    <Container href={`/note/${note.id}`} onContextMenu={(e)=>{handleContextMenu(e, note.id)}}>
       <Content>
         <NoteBackground className="note_background"></NoteBackground>
         <Title>{note.title || "New note"}</Title>
@@ -73,7 +76,7 @@ const bounceAnimation = keyframes`
   100% { transform: scale(100%) }
 `
 
-export const Container = styled(Link)`
+const Container = styled(Link)`
   height: 250px;
   width: 200px;
   background-color: #000;
@@ -91,13 +94,13 @@ export const Container = styled(Link)`
   margin: auto;
 `;
 
-export const LastUpdate = styled.div`
+const LastUpdate = styled.div`
   position: absolute;
   margin-bottom: -270px;
   font-size: 12px;
 `
 
-export const Content = styled.div`
+const Content = styled.div`
   height: 100%;
   width: 100%;
   background-color: #fff;
@@ -119,8 +122,8 @@ export const Content = styled.div`
   }
 `;
 
-export const NoteBackground = styled.div`
-position: absolute;
+const NoteBackground = styled.div`
+  position: absolute;
   background-color: #ffe133;
   width: 200px;
   height: 250px;
@@ -129,7 +132,7 @@ position: absolute;
   transition: 0.4s;
 `
 
-export const Title = styled.h2`
+const Title = styled.h2`
   z-index: 1;
   width: 100%;
   text-align: center;
@@ -138,7 +141,7 @@ export const Title = styled.h2`
   margin: 7px;
 `;
 
-export const Text = styled.p`
+const Text = styled.p`
   z-index: 1;
   line-height: 1.2;
   width: 100%;
