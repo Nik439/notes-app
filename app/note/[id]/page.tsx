@@ -58,7 +58,7 @@ export default function NotePage({ params: {id} }: { params: { id: number } }) {
     if (noteState == "success") {
       updateNote(id, title, text)
     }    
-  },[title, text, noteState])
+  },[id, title, text, noteState])
 
   useEffect(() => {
     if (titleRef.current) {
@@ -69,7 +69,7 @@ export default function NotePage({ params: {id} }: { params: { id: number } }) {
       //set the height directly, outside of the render loop
       titleRef.current.style.height = scrollHeight + "px";
     }
-  }, [titleRef.current, title, windowWidth]);
+  }, [title, windowWidth]);
 
   useEffect(() => {
     if (textRef.current) {
@@ -80,7 +80,7 @@ export default function NotePage({ params: {id} }: { params: { id: number } }) {
       //set the height directly, outside of the render loop
       textRef.current.style.height = scrollHeight + "px";
     }
-  }, [textRef.current, text, windowWidth]);
+  }, [text, windowWidth]);
 
 
   useEffect(()=>{
@@ -101,7 +101,7 @@ export default function NotePage({ params: {id} }: { params: { id: number } }) {
     window.addEventListener('resize', handleResize)
     
     return () => window.removeEventListener("resize", handleResize);
-  },[])
+  },[id, router])
 
 
   return (
