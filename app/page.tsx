@@ -1,8 +1,8 @@
 'use client'
-import styled, { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider, keyframes } from "styled-components";
 import { theme } from "./global_theme";
 import Note from "./components/note";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { api_state } from "./models/api_state";
 import { note } from "./models/note";
 import Image from "next/image";
@@ -60,9 +60,9 @@ export default function Home() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container>
-        {notesState=="loading" ? 
-          <></>
+      <Container className={notesState=="loading" ? "load" : ""}>
+        {notesState=="loading"? 
+        <></>
         :
         <>
           <CustomContextMenu id="context_menu" onClick={handleDelete} $position={menuPosition} className={menuActive ? "active" : ""}>
@@ -85,6 +85,11 @@ export default function Home() {
   )
 }
 
+const fadeAnimation = keyframes`
+  0% { opacity: 0.5 }
+  50% { opacity: 1 }
+  100% { opacity: 0.5 }
+`
 
 const Container = styled.div`
   display: grid;
@@ -98,8 +103,19 @@ const Container = styled.div`
   max-width: 1490px;
   width: 100%;
 
+  &.load {
+    margin-bottom: 0;
+    background-image: url("/note_load.svg");
+    background-repeat: space repeat;
+    animation: ${fadeAnimation} 1s infinite;
+  }
+
   ${({theme}) => theme.breakpoint.xxl} {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+
+    &.load {
+      background-image: url("/note_load_space.svg");
+    }
   }
 
   ${({theme}) => theme.breakpoint.xl} {
@@ -116,10 +132,22 @@ const Container = styled.div`
 
   ${({theme}) => theme.breakpoint.sm} {
     grid-template-columns: 1fr 1fr;
+
+    &.load {
+      background-position-x: 15%, 85%;
+      background-repeat: repeat-y;
+      background-image: url("/note_load_space.svg"), url("/note_load_space.svg");
+    }
   }
 
   ${({theme}) => theme.breakpoint.xs} {
     grid-template-columns: 1fr;
+
+    &.load {
+      background-position-x: center;
+      background-repeat: repeat-y;
+      background-image: url("/note_load.svg");
+    }
   }
 `;
 
