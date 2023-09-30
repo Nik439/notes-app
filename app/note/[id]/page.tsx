@@ -110,12 +110,14 @@ export default function NotePage({ params: {id} }: { params: { id: number } }) {
         <Content>
           {noteState=="loading" ? 
             <></>
-          :
+          :noteState=="success" ?
             <>
               <Title onChange={handleTitleChange} onKeyDown={handleTitleKeyDown} value={title} ref={titleRef} rows={1} placeholder="New note"></Title>
               <Text onChange={handleTextChange} onKeyDown={handleTextKeyDown} value={text} ref={textRef} rows={1} placeholder="text..."></Text>
               <FocusHelper onClick={focusText}></FocusHelper>
             </>
+          :
+            <></>
           }
         </Content>
       </Container>

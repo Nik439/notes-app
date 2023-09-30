@@ -61,24 +61,25 @@ export default function Home() {
   return (
     <ThemeProvider theme={theme}>
       <Container className={notesState=="loading" ? "load" : ""}>
-        {notesState=="loading"? 
-        <></>
+        {notesState=="loading"?
+          <></>
+        :notesState=="success"?
+          <>
+            <CustomContextMenu id="context_menu" onClick={handleDelete} $position={menuPosition} className={menuActive ? "active" : ""}>
+              <MenuBackground className="menu_background"></MenuBackground>
+              <MenuImg src="/bin.svg" alt="" width={50} height={50}></MenuImg>
+              <MenuText>Delete</MenuText>
+            </CustomContextMenu>
+            {notes.sort((a, b) => {
+              //sort array from most to least recent
+              return a.last_update && b.last_update ? new Date(b.last_update).getTime()-new Date(a.last_update).getTime() : 0
+            })
+            .map((note: note)=>(
+              <Note key={note.id} note={note} handleContextMenu={handleContextMenu}></Note>
+            ))}
+          </>
         :
-        <>
-          <CustomContextMenu id="context_menu" onClick={handleDelete} $position={menuPosition} className={menuActive ? "active" : ""}>
-            <MenuBackground className="menu_background"></MenuBackground>
-            <MenuImg src="/bin.svg" alt="" width={50} height={50}></MenuImg>
-            <MenuText>Delete</MenuText>
-          </CustomContextMenu>
-          {notes.sort((a, b) => {
-            //sort array from most to least recent
-            return a.last_update && b.last_update ? new Date(b.last_update).getTime()-new Date(a.last_update).getTime() : 0
-          })
-          .map((note: note)=>(
-            <Note key={note.id} note={note} handleContextMenu={handleContextMenu}></Note>
-          ))}
-        </>
-          
+          <Error>An error has occurred, please try again later.</Error>
         }
       </Container>
     </ThemeProvider>
@@ -204,3 +205,9 @@ const MenuBackground = styled.div`
   z-index: 0;
   pointer-events: none;
 `
+
+const Error = styled.p`
+  position: absolute;
+  font-size: 20px;
+  width: calc(100% - 40px);
+`;
