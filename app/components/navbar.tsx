@@ -23,7 +23,7 @@ export default function Navbar() {
   }, [path])
 
   function handleDelete() {
-    deleteNote(path.substring(path.length-1)).then(()=>{
+    deleteNote(path.substring(path.lastIndexOf("/")+1)).then(()=>{
       router.push("/")
     }).catch((err)=>{
       console.error(err)
