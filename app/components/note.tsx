@@ -133,6 +133,7 @@ const NoteBackground = styled.div`
 `
 
 const Title = styled.h2`
+  position: relative;
   z-index: 1;
   font-size: 24px;
   width: 100%;
@@ -148,6 +149,7 @@ const Title = styled.h2`
 `;
 
 const Text = styled.p`
+  position: relative;
   z-index: 1;
   font-size: 16px;
   line-height: 1.2;
