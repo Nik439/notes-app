@@ -15,3 +15,5 @@ export async function GET(req, res) {
     status: 200,
   });
 }
+
+export const revalidate = 0
