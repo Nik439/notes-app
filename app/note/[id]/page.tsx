@@ -1,5 +1,5 @@
 'use client'
-import styled, { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider, keyframes } from "styled-components";
 import { theme } from "../../global_theme";
 import { useEffect, useRef, useState } from "react";
 import { api_state } from "../../models/api_state";
@@ -107,33 +107,59 @@ export default function NotePage({ params: {id} }: { params: { id: number } }) {
   return (
     <ThemeProvider theme={theme}>
       <Container>
-        {noteState=="loading" ? 
-          <></>
-        :
-          <>
-            <Title onChange={handleTitleChange} onKeyDown={handleTitleKeyDown} value={title} ref={titleRef} rows={1} placeholder="New note"></Title>
-            <Text onChange={handleTextChange} onKeyDown={handleTextKeyDown} value={text} ref={textRef} rows={1} placeholder="text..."></Text>
-            <FocusHelper onClick={focusText}></FocusHelper>
-          </>
-        }
+        <Content>
+          {noteState=="loading" ? 
+            <></>
+          :
+            <>
+              <Title onChange={handleTitleChange} onKeyDown={handleTitleKeyDown} value={title} ref={titleRef} rows={1} placeholder="New note"></Title>
+              <Text onChange={handleTextChange} onKeyDown={handleTextKeyDown} value={text} ref={textRef} rows={1} placeholder="text..."></Text>
+              <FocusHelper onClick={focusText}></FocusHelper>
+            </>
+          }
+        </Content>
       </Container>
     </ThemeProvider>
   )
 }
 
 
+const clipAnimation = keyframes`
+  0% { clip-path: polygon(50% 0%, 50% 0%, 50% 100%, 50% 100%); }
+  100% { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%); }
+`
+
 const Container = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  
+  background-color: #000;
+  
+  width: 100%;
+  max-width: 1490px;
+  margin: 0 auto 10px;
+  border: 2px solid #000;
+  border-bottom: 6px solid #000;
+  border-right: 6px solid #000;
+  border-radius: 8px;
+
+  animation: ${clipAnimation} 0.8s ease-out;
+`;
+
+const Content = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
   align-items: start;
   justify-content: start;
   background-color: #fff;
-  padding: 10px 0px;
+  padding: 10px;
   width: 100%;
-  max-width: 1490px;
-  margin: 0 auto;
-`;
+  height: 100%;
+  border-radius: 6px;
+  animation: ${clipAnimation} 0.8s ease-out 5ms;
+`
 
 const Title = styled.textarea`
   font-size: 30px;
